@@ -23,7 +23,7 @@
 # -------------
 # Written by: Daniel K. Weber (Veglia Lab)
 # University of Minnesota
-# Last updated: Oct 24 2020
+# Last updated: Nov 6 2020 (Manu)
 
 import numpy as np
 import nmrglue as ng
@@ -102,7 +102,7 @@ def main():
     print('Writing UCSF file: {}...'.format(outfile))
     udic = {
         'ndim': 2,
-        0: {'car': 100*((y_max-y_min)/2),
+        0: {'car': 100*((y_max+y_min)/2),
             'complex': False,
             'encoding': 'states',
             'freq': True,
@@ -111,7 +111,7 @@ def main():
             'size': y_num,
             'sw': 100*(y_max-y_min),
             'time': False},
-        1: {'car': 100*((x_max-x_min)/2),
+        1: {'car': 100*((x_max+x_min)/2),
             'complex': False,
             'encoding': 'direct',
             'freq': True,
@@ -122,7 +122,6 @@ def main():
             'time': False}
     }
     dic = ng.sparky.create_dic(udic)
-    ng.sparky.write(outfile, dic, data.astype('float32'), overwrite=True)
-
+    ng.sparky.write(outfile, dic, data.astype('float32'), overwrite=True) 
 if __name__ == '__main__':
     main()
